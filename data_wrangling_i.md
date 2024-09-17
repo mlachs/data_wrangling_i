@@ -165,3 +165,33 @@ litters_df=
     )
   )
 ```
+
+## Import Excel file
+
+Import MLB 2011 summary data
+
+``` r
+mlb_df = read_excel("data/mlb11.xlsx", sheet='mlb11')
+```
+
+\##Import SAS Data
+
+``` r
+pulse_df = read_sas('data/public_pulse_data.sas7bdat')
+```
+
+\##Never use read.csv()
+
+``` r
+litters_df=read.csv('data/FAS_litters.csv')
+```
+
+Never do this either:
+
+``` r
+litters_df$L
+```
+
+    ## Warning: Unknown or uninitialised column: `L`.
+
+    ## NULL
