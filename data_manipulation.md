@@ -584,3 +584,16 @@ arrange(litters_df, pups_born_alive, gd0_weight)
     ## 10 Low7  #112                23.9        40.5          19               6
     ## # ℹ 39 more rows
     ## # ℹ 2 more variables: pups_dead_birth <dbl>, pups_survive <dbl>
+
+## Piping
+
+``` r
+litters_df =
+  read.csv('data/FAS_litters.csv', na = c('NA',".","")) %>% 
+  janitor::clean_names() %>% 
+  select(-pups_born_alive) %>% 
+  filter(group=='Con7') %>% 
+  mutate(
+    wt_gain = gd18_weight - gd0_weight
+  )
+```
