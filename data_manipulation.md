@@ -596,4 +596,15 @@ litters_df =
   mutate(
     wt_gain = gd18_weight - gd0_weight
   )
+
+write_csv(litters_df,'data/cleanded_FAS_Litters.csv')
+```
+
+``` r
+read_csv('data/FAS_litters.csv',na = c('NA',".","")) %>% 
+  janitor::clean_names() %>% 
+  mutate(
+    wt_gain = gd18_weight - gd0_weight
+  ) %>% 
+  lm(wt_gain ~ pups_born_alive, data =_)
 ```
