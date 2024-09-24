@@ -1,23 +1,14 @@
----
-title: "Data Import"
-output: github_document
----
+Data Import
+================
 
+This document will show how to import data.
 
-```{r setup, echo=FALSE, message=FALSE}
-library(tidyverse)
-library(readxl)
-library(haven)
-```
-
-This document will show how to import data. 
-```{r}
+``` r
 pulse_df= read_sas("data/public_pulse_data.sas7bdat") %>% 
   janitor::clean_names()
-
 ```
 
-```{r}
+``` r
 pulse_tidy_df =
   pulse_df %>% 
   pivot_longer(
@@ -32,7 +23,7 @@ pulse_tidy_df =
   relocate(id, visit)
 ```
 
-```{r}
+``` r
 litters_df=
   read_csv('data/FAS_litters.csv', na = c('NA','.','')) %>% 
   janitor::clean_names() %>% 
@@ -47,21 +38,29 @@ litters_df=
   ))
 ```
 
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
-## Pivot wider 
+## Pivot wider
 
-```{r}
+``` r
 analysis_df = 
   tibble(
     group = c('treatment','treatment','control','control'),
     time= c('pre','post','pre','post'),
     mean = c(4,10,4.2,5)
   )
-
 ```
-pivot wider for human readability 
 
-```{r}
+pivot wider for human readability
+
+``` r
 analysis_df %>% 
   pivot_wider(
     names_from = time,
@@ -70,3 +69,7 @@ analysis_df %>%
   knitr::kable()
 ```
 
+| group     | pre | post |
+|:----------|----:|-----:|
+| treatment | 4.0 |   10 |
+| control   | 4.2 |    5 |
